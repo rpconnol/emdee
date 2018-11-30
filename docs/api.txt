@@ -1,0 +1,145 @@
+API for class Emdee:
+
+__init__(mode=None, loc=None)
+  When creating an Emdee class, 'mode' must be chosen.
+  If mode == 'load', then supply a loc and a previous emdee run will be loaded.
+  If mode == 'new',  then a new save directory is created.
+	If loc == None, then the directory will be named generically [date/time].
+	If loc is specified, then the data will be saved here.
+	  Note: this directory must be empty! (will throw exception)
+  example: MuhClass = emdee.Emdee(mode='load',loc='saved_LOGS/mass_100walkers')
+
+
+Variables:
+params -- names of dStar parameters to include in the MCMC analysis
+lbounds -- lower bounds on the above parameters
+ubounds -- upper bounds on the above parameters
+nwalkers -- number of walkers in the MCMC, default = 100
+dstar_dir -- location of dStar on the machine. Defaults to "$DSTAR_DIR", if 
+             this environment variable is set then you shouldn't need to mess 
+             with this.
+data_dir -- Location of saved data
+_lastlogged -- the last time step written to the logs / file output. For 
+               loaded runs, this will be determined from the final line of 
+               the loaded histories.
+
+
+"Public" functions (user interface):
+
+AddParam(p,b)
+	Adds a dStar parameter p to the MCMC, with bounds b=[lower,upper].
+	If a parameter is already in the list, you'll get yelled at.
+	example:  Emdee.AddParam("core_mass",[1.4,2.0])
+	If one doesn't provide bounds, a default pair will be chosen 
+	(see _DefaultBounds).
+	Can only be performed if the run is fresh (_lastlogged == 0)!
+
+ChangeBounds(p,b)
+	Changes the bounds b on a parameter p that's already in the MCMC.
+	If the parameter isn't in the list yet, you'll get yelled at.
+	example:  Emdee.ChangeBounds("core_mass",[1.6,2.1])
+	Must provide bounds manually for this! If you desperately want defaults try:
+	[class].ChangeBounds("core_mass",[class]._DefaultBounds("core_mass"))
+	Can only be performed if the run is fresh (_lastlogged == 0)!
+
+PrintParams(printbounds=True)
+	Print the current dStar parameters and bounds.
+	printbounds=False for just a list of the parameter names
+
+ChangeWalkers(n)
+	Changes the number of walkers.
+	Can only be performed if the run is fresh (_lastlogged == 0)!
+
+ChangeDStarDir(newdir)
+	Changes the dStar base directory. The default is $DSTAR_DIR; it's 
+    probably better to set the DSTAR_DIR environment variable externally 
+    and just leave this as is.
+
+GoMCMC(nsteps,output=True)
+	** Big one **
+	Run nsteps of MCMC with the current params and their bounds.
+	Make sure the dStar side of things is already set (see "Setting up dStar" 
+    above). After all nsteps complete (careful, could be time consuming!), 
+    if output=True, the emcee chains will be saved to files.
+	if output=False, the results are still saved in the emcee class and can
+	be plotted or manipulated, but once the class/script is closed they gone.
+
+PlotChains()
+	Plot the values of each parameter as a time series for all walkers.
+	Useful for checking out burn in times.
+
+PlotCorner(burnin=0,lastpt=False)
+	Make a corner plot of the MCMC results.
+	burnin -- can be set to chop off the first burnin steps.
+	lastpt -- will only plot the final position of each walker, rather than 
+              all data after burnin (burnin is ignored if lastpt==True).
+
+PrintPercentiles(lowmidhigh=[16,50,84],burnin=0,lastpt=False)
+	Print the "values + error bars" of each parameter. By default, "Mean" 
+    value is 50th percentile, "upper error" is 84th percentile, "lower error" 
+    is 16th percentile.
+	These can be set manually with lowmidhigh.
+	burnin and lastpt work same as in PlotCorner.
+
+
+
+
+
+"Private" functions:
+
+_InitWalkers()
+	Initialize the walkers with positions for each param taken from 
+    respective bounds.
+
+emdeeDefaults.Bounds(p)
+	Returns a default set of bounds for some common dStar parameters.
+	Try emdeeDefaults.Bounds() to print a list of parameters and defaults.
+	If the given parameter is not in the list of defaults, returns [0,0].
+	NOTE: Highly recommended to set bounds manually for your specific problem,
+		  either to help speed up convergence with motivated constraints,
+		  or if you find your MCMC is piling up at one of the default bounds!
+
+emdeeDefaults.Format(p)
+	Returns a "typical" format (string) for printing values of common dStar
+	parameters. Mostly used for interfacing with the user; values generated
+	by the sampler and printed to the inlist/data files should be done with
+	much higher precision (likely just let Python decide)
+	
+_MakeInlist()
+	Copies inlist_preamble to inlist and appends the current params+values.
+
+_RunDStar()
+	Calls a dStar run, pipes the stdout, and returns the chi^2 (it better 
+    be the very last line dStar prints to the terminal!).
+	
+_LnLike(theta)
+	log-likelihood function where most of the work is done, following in the 
+    example of the emcee documentation. New walker positions (theta) are fed 
+    in, inlist is made, dStar is run, and finally chi^2 / 2.0 is returned.
+	
+_LnPrior(theta)
+	Returns -infinity if any of the chosen positions are outside of their 
+    bounds. Otherwise returns a constant (for now: 0.0).
+
+_LnProb(theta)
+	Full log-probability function, the sum of LnLike and LnPrior.
+	Checks LnPrior first and doesn't actually call LnLike (running dStar) 
+    if LnPrior is -infinity.
+
+_LogStart()
+	Start a new log if one does not already exist. Log is going to contain 
+    info likedate/time of creation, number of walkers, original save 
+    directory name, etc.
+
+_LogParams()
+	Writes dStar parameters + bounds to the log file. 
+	Only use after parameters are finalized!
+
+_LogUpdate()
+	Writes update to log file after GoMCMC. Contains start/end/run time info 
+    of that chunk of MCMC, and perhaps some useful info (percentiles, 
+    autocorr times, etc).
+
+_Output()
+	Writes MCMC data to files after GoMCMC.
+
