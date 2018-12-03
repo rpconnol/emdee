@@ -19,9 +19,22 @@ dstar_dir -- location of dStar on the machine. Defaults to "$DSTAR_DIR", if
              this environment variable is set then you shouldn't need to mess 
              with this.
 data_dir -- Location of saved data
+MdotIntervals -- special variable to indicate the number of "extra" epoch_Mdot
+				 intervals where mdot = 0.0, to align with the desired number of
+				 "monitor" times for your chosen source.
+				 Example: epoch_Mdots = 1e17,7*0.0 for MXB obs data, so MdotIntervals=7
+				 ## Not sure I'm particularly happy with the way this is done atm ##
 _lastlogged -- the last time step written to the logs / file output. For 
                loaded runs, this will be determined from the final line of 
                the loaded histories.
+_current_pos -- current "positions" of the walkers. If run is new, this is
+                created (uniform random distribution within provided bounds) when
+                GoMCMC is called for the first time.
+_current_lnprob -- the "current" log-probabilities of each walker. If run is new,
+				   this is None. If run is in progress or loaded, this helps save
+				   time so an extra dStar run isnt needed to calculate the 
+				   lnprob at _current_pos
+_emceeSampler -- the emcee.EnsembleSampler class
 
 
 "Public" functions (user interface):
@@ -91,6 +104,10 @@ _InitWalkers()
 	Initialize the walkers with positions for each param taken from 
     respective bounds.
 
+_InitSampler()
+	Initializes self.emceeSampler as an emcee.EnsembleSampler with self.nwalkers,
+	ndim=len(self.params), and self._LnProb as the log-probability function.
+
 emdeeDefaults.Bounds(p)
 	Returns a default set of bounds for some common dStar parameters.
 	Try emdeeDefaults.Bounds() to print a list of parameters and defaults.
@@ -105,8 +122,8 @@ emdeeDefaults.Format(p)
 	by the sampler and printed to the inlist/data files should be done with
 	much higher precision (likely just let Python decide)
 	
-_MakeInlist()
-	Copies inlist_preamble to inlist and appends the current params+values.
+_MakeInlist(theta)
+	Copies inlist_preamble to inlist and appends the current params & values (theta).
 
 _RunDStar()
 	Calls a dStar run, pipes the stdout, and returns the chi^2 (it better 

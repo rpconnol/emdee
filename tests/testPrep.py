@@ -28,6 +28,13 @@ def run_tests():
     print(testEmdee.dstar_dir)
     print()
 
+    testEmdee._lastlogged = 100
+    testEmdee.AddParam('Mdot')
+    print()
+
+    print("\n...testPrep complete...\n")
+
 
 if __name__ == '__main__':
     run_tests()
+    # This won't work unless emdee is in site-packages or on the python path.

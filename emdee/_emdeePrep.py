@@ -14,8 +14,8 @@ class mixin:
     def AddParam(self,p,b=None):
 
         if self._lastlogged > 0:
-            raise emdee._emdeeExceptions.NonzeroRunCount(
-                "Cannot add parameters to a run 'in progress'")
+            #raise emdee._emdeeExceptions.NonzeroRunCount(
+            print("Cannot add parameters to a run 'in progress'")
 
         if p in self.params:
             print(p+" is already in the parameter list.")
@@ -34,8 +34,8 @@ class mixin:
     def ChangeBounds(self,p,b):
 
         if self._lastlogged > 0:
-            raise emdee._emdeeExceptions.NonzeroRunCount(
-                "Cannot add parameters to a run 'in progress'")
+            #raise emdee._emdeeExceptions.NonzeroRunCount(
+            print("Cannot change bounds of a run 'in progress'")
 
         lb = b[0]
         ub = b[1]
@@ -64,8 +64,8 @@ class mixin:
     def ChangeWalkers(self,n):
 
         if self._lastlogged > 0:
-            raise emdee._emdeeExceptions.NonzeroRunCount(
-                "Cannot change walkers for a run 'in progress'")
+            #raise emdee._emdeeExceptions.NonzeroRunCount(
+            print("Cannot change walkers for a run 'in progress'")
 
         if (n%2 == 0) and (n > 2*len(self.params)):
             self.nwalkers = n
