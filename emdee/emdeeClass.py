@@ -7,6 +7,7 @@ import emdee._emdeeResults
 
 import datetime
 import time
+import os
 
 class Emdee(emdee._emdeePrep.mixin, 
             emdee._emdeeMCMC.mixin, 
@@ -24,8 +25,11 @@ class Emdee(emdee._emdeePrep.mixin,
 
             if loc == None:
                 loc = datetime.datetime.fromtimestamp(
-                    time.time()).strftime('%Y-%m-%d_%Hh%Mm%Ss')
+                    time.time()).strftime('output_%Y-%m-%d_%Hh%Mm%Ss')
             self.data_dir = loc
+            if not os.path.exists(self.data_dir):
+                os.makedirs(self.data_dir)
+                print("creating "+self.data_dir+" directory")
 
             self.nwalkers = 100
 

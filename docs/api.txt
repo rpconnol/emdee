@@ -77,22 +77,26 @@ GoMCMC(nsteps,output=True)
 	if output=False, the results are still saved in the emcee class and can
 	be plotted or manipulated, but once the class/script is closed they gone.
 
-PlotChains()
+PlotChains(save=False,name="chain.png")
 	Plot the values of each parameter as a time series for all walkers.
-	Useful for checking out burn in times.
+	Useful for checking out burn in times. If save == False the plot is just
+	shown on-screen; if save == True the plot is saved to loc (include extension).
 
-PlotCorner(burnin=0,lastpt=False)
-	Make a corner plot of the MCMC results.
+PlotCorner(save=False,name="corner.png",burnin=0,lastpt=False)
+	Make a corner plot of the MCMC results. If save == False the plot is just
+	shown on-screen; if save == True the plot is saved to loc (include extension).
 	burnin -- can be set to chop off the first burnin steps.
 	lastpt -- will only plot the final position of each walker, rather than 
               all data after burnin (burnin is ignored if lastpt==True).
 
-PrintPercentiles(lowmidhigh=[16,50,84],burnin=0,lastpt=False)
+PrintPercentiles(lowmidhigh=[16,50,84],burnin=0,lastpt=False,print_acor=False,_log=False)
 	Print the "values + error bars" of each parameter. By default, "Mean" 
     value is 50th percentile, "upper error" is 84th percentile, "lower error" 
     is 16th percentile.
 	These can be set manually with lowmidhigh.
 	burnin and lastpt work same as in PlotCorner.
+	print_acor will include the estimated autocorrelation time for each parameter.
+	_log is for internal use; returns the output as a string, instead of just printing it.
 
 
 
@@ -145,12 +149,8 @@ _LnProb(theta)
 
 _LogStart()
 	Start a new log if one does not already exist. Log is going to contain 
-    info likedate/time of creation, number of walkers, original save 
-    directory name, etc.
-
-_LogParams()
-	Writes dStar parameters + bounds to the log file. 
-	Only use after parameters are finalized!
+    info likedate/time of creation, number of walkers, dStar parameters + bounds, etc.
+    Only use after parameters are finalized!
 
 _LogUpdate()
 	Writes update to log file after GoMCMC. Contains start/end/run time info 
@@ -160,3 +160,5 @@ _LogUpdate()
 _Output()
 	Writes MCMC data to files after GoMCMC.
 
+_OutputOneLine(pos)
+	Writes single (previous) MCMC step (pos) to files. Mostly for testing!!

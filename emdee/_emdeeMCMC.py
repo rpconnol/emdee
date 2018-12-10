@@ -10,7 +10,9 @@ class mixin:
             self._current_pos = self._InitWalkers()
             self._current_lnprob = None
             self._InitSampler()
+            self._LogStart()
 
+        print("Beginning MCMC iterations...")
         for i, result in enumerate(
                     self._emceeSampler.sample(self._current_pos,
                                               lnprob0=self._current_lnprob,
@@ -24,11 +26,16 @@ class mixin:
                         " of "+
                         str(self._lastlogged+nsteps)+
                         " total).")
-        
-        self._current_pos = result["pos"]
-        self._current_lnprob = result["lnprob"]
+            
+            # For testing, output one line at a time
+            (pos,lnprob,rstate) = result
+            self._OutputOneLine(pos)  
+
+        (self._current_pos, self._current_lnprob, rstate) = result
+        self._lastlogged = i+1
 
         # OUTPUT!
+        self._LogUpdate()
     
 
     def _InitWalkers(self):

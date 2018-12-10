@@ -1,6 +1,15 @@
+# dev stuff and ugly overheard
 dev
 .vscode
 .DS_Store
 
+# Compiled and cache files
 *.pyc
 *__pycache__
+
+# Stuff related to tests and output and dStar
+*run_dStar
+*.o
+LOGS
+*.png
+output_*

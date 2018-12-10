@@ -67,11 +67,12 @@ class mixin:
             #raise emdee._emdeeExceptions.NonzeroRunCount(
             print("Cannot change walkers for a run 'in progress'")
 
-        if (n%2 == 0) and (n > 2*len(self.params)):
+        if (n%2 == 0) and (n >= 2*len(self.params)):
+            print("Setting number of walkers: "+str(n))
             self.nwalkers = n
         else:
-            print("Number of walkers must be even and more than twice")
-            print("the number of parameters (or emcee gets upset).")
+            print("NOTE: Number of walkers must be even and more than")
+            print("twice the number of parameters (or emcee gets upset).")
     
 
     def ChangeDStarDir(self,newdir):
