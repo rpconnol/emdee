@@ -27,14 +27,16 @@ class mixin:
                         str(self._lastlogged+nsteps)+
                         " total).")
             
-            # For testing, output one line at a time
+            # For testing(?), output one line at a time
             (pos,lnprob,rstate) = result
-            self._OutputOneLine(pos)  
+            self._OutputOneLine(pos)
+            self._OutputCurrentLnprob(lnprob)
 
         (self._current_pos, self._current_lnprob, rstate) = result
-        self._lastlogged = i+1
+        self._UpdateLocalChain()
+        self._emceeSampler.reset()
 
-        # OUTPUT!
+        self._lastlogged += nsteps
         self._LogUpdate()
     
 

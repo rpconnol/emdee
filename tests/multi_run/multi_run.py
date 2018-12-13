@@ -1,3 +1,7 @@
+# Tests/demonstrates ability to call GoMCMC multiple times on the same
+# emdee class. 
+
+
 import time
 import datetime
 import os
@@ -18,9 +22,17 @@ emdeeClass.AddParam("core_mass")
 emdeeClass.AddParam("core_radius")
 emdeeClass.PrintParams()
 
-emdeeClass.ChangeWalkers(100)
+emdeeClass.ChangeWalkers(10)
 
-emdeeClass.GoMCMC(50)
+emdeeClass.GoMCMC(3)
+
+print(emdeeClass._localChain)
+print(emdeeClass._lastlogged)
+
+emdeeClass.GoMCMC(3)
+
+print(emdeeClass._localChain)
+print(emdeeClass._lastlogged)
 
 emdeeClass.PlotChains(save=True,hlines={"core_mass":1.6,"core_radius":10.4})
 emdeeClass.PlotCorner(lastpt=True,save=True)

@@ -1,0 +1,13 @@
+RC Notes:  Here is a "recreation" of my MCMC_practice/first_attempt with the emdee
+framework. This test was used to iron out the dStar, MCMC, and plotting functionality
+before any save/load aspects were integrated.*
+
+It can be used as a reference on how to set up a very simple MCMC. However, to actually
+RUN this script/test, one must compile first by ensuring that env variable $DSTAR_DIR
+points to the desired dStar root directory, and then executing ./mk.  This creates the 
+run_dStar executable. Now the Python script can be run.
+
+Here only two parameters are scanned over, core_mass and core_radius, with default bounds.
+100 walkers, only 10 steps (so not enough to get a reasonable sample, just a test).
+
+*Update 12-6-18:  Now includes full output to files.

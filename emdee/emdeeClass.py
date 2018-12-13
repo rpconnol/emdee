@@ -18,7 +18,19 @@ class Emdee(emdee._emdeePrep.mixin,
     def __init__(self,mode='new',loc=None):
 
         if mode == 'load':
-            print("load stuff here")
+            print("loading previous run")
+
+            if loc == None:
+                sys.exit("Must provide a data directory to load")
+            else:
+                self.data_dir = loc
+        
+            self._ReadLog()
+            self._LoadLocalChain()
+            self._InitSampler()
+            self._SetCurrentConditions()
+
+
         
         if mode == 'new':
             print("creating new run")
@@ -34,12 +46,12 @@ class Emdee(emdee._emdeePrep.mixin,
             self.nwalkers = 100
 
             self._lastlogged = 0
+
+            self.params = []
+            self.lbounds = []
+            self.ubounds = []
         
         self.dstar_dir = '$DSTAR_DIR'
-
-        self.params = []
-        self.lbounds = []
-        self.ubounds = []
     
 
 

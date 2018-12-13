@@ -18,7 +18,7 @@ class mixin:
 
             for iwalker in range(self.nwalkers):
 
-                axes[iparam].plot(self._emceeSampler.chain[iwalker,:,iparam], 
+                axes[iparam].plot(self._localChain[iwalker,:,iparam], 
                                   color='black', linewidth=0.5, alpha=0.5)
 
                 axes[iparam].set_ylabel(self.params[iparam])
@@ -38,11 +38,9 @@ class mixin:
         ndim = len(self.params)
 
         if lastpt == True:
-            samples = self._emceeSampler.chain[:, -1, :].reshape((-1,
-                                                                  ndim))
+            samples = self._localChain[:, -1, :].reshape((-1,ndim))
         else:
-            samples = self._emceeSampler.chain[:, burnin:, :].reshape((-1, 
-                                                                       ndim))
+            samples = self._localChain[:, burnin:, :].reshape((-1,ndim))
 
         fig = corner.corner(samples, labels=self.params)
 
@@ -59,11 +57,9 @@ class mixin:
         ndim = len(self.params)
 
         if lastpt == True:
-            samples = self._emceeSampler.chain[:, -1, :].reshape((-1,
-                                                                  ndim))
+            samples = self._localChain[:, -1, :].reshape((-1,ndim))
         else:
-            samples = self._emceeSampler.chain[:, burnin:, :].reshape((-1, 
-                                                                       ndim))
+            samples = self._localChain[:, burnin:, :].reshape((-1,ndim))
 
         # Median, up, down
         percentiles = map(lambda v: (v[1], v[2]-v[1], v[1]-v[0]), 

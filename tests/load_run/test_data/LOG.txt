@@ -1,0 +1,49 @@
+Created: 2018-12-13 15:01:27
+Output directory: output_2018-12-13_15h01m27s
+
+Number of walkers: 10
+dStar parameters:
+  core_mass   1.40 - 2.00
+  core_radius   8.00 - 13.00
+
+
+Update: 2018-12-13 15:03:01
+Total iterations: 3
+Percentiles:
+  core_mass: 1.68 +0.19 -0.16
+  core_radius: 11.05 +0.64 -0.93
+(percentiles calculated from full chain; no burn in removal)
+
+
+Update: 2018-12-13 15:04:23
+Total iterations: 6
+Percentiles:
+  core_mass: 1.67 +0.15 -0.13
+  core_radius: 11.01 +0.65 -0.68
+(percentiles calculated from full chain; no burn in removal)
+
+
+Update: 2018-12-13 16:07:22
+Total iterations: 9
+Percentiles:
+  core_mass: 1.66 +0.12 -0.13
+  core_radius: 11.18 +0.43 -0.86
+(percentiles calculated from full chain; no burn in removal)
+
+
+Update: 2018-12-13 16:13:28
+Total iterations: 12
+Percentiles:
+  core_mass: 1.67 +0.09 -0.10
+  core_radius: 11.21 +0.41 -0.88
+(percentiles calculated from full chain; no burn in removal)
+
+
+Update: 2018-12-13 16:16:24
+Total iterations: 15
+Percentiles:
+  core_mass: 1.67 +0.09 -0.11
+  core_radius: 11.23 +0.39 -0.84
+(percentiles calculated from full chain; no burn in removal)
+
+
