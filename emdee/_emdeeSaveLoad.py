@@ -105,10 +105,10 @@ class mixin:
             f.close()
     
 
-    def _OutputCurrentLnprob(self,lnp):
+    def _OutputCurrentLnprob(self,lnp,loc='last_lnprob.txt'):
         #Writes single MCMC lnprob to file
 
-        f = open(self.data_dir+"/last_lnprob.txt", "w")
+        f = open(self.data_dir+"/"+loc, "w")
 
         for iwalker in range(self.nwalkers):
 

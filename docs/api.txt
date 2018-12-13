@@ -34,7 +34,11 @@ _current_lnprob -- the "current" log-probabilities of each walker. If run is new
 				   this is None. If run is in progress or loaded, this helps save
 				   time so an extra dStar run isnt needed to calculate the 
 				   lnprob at _current_pos
+_localChain -- the saved and persistent version of _emceeSampler.chain. This is what
+			   results are plotted from, and this is populated by the saved data files
+			   when emdee is initialized with mode = 'load'.
 _emceeSampler -- the emcee.EnsembleSampler class
+
 
 
 "Public" functions (user interface):
@@ -158,7 +162,27 @@ _LogUpdate()
     autocorr times, etc).
 
 _Output()
-	Writes MCMC data to files after GoMCMC.
+	Writes MCMC data to files after GoMCMC. Currently not functional, deferred in
+	preference of _OutputOneLine for now.
 
 _OutputOneLine(pos)
-	Writes single (previous) MCMC step (pos) to files. Mostly for testing!!
+	Writes single (previous) MCMC step (pos) to files.
+
+_OutputCurrentLnprob(lnp,loc='last_lnprob.txt')
+	Writes lnp to a file, the most recent lnprobs, which is loaded if this run ever
+	needs to be resumed (feeding the sampler the "current" lnprob means it doesn't
+	have to recalculate for the initial positions; saves an iteration).
+
+_UpdateLocalChain()
+	Stashes the results in sampler.chain to the class's own _localChain. This structure
+	works better for loading and plotting old data / resuming runs (emcee doesn't init
+	a sampler with user-provided chain data).
+
+_ReadLog()
+	Reads in dStar params and bounds from a LOG.txt file to a mode=="load" initialization.
+
+_LoadLocalChain()
+	Loads previous results into _localChain in a mode=="load" initialization.
+
+_SetCurrentConditions()
+	Sets _current_pos and _current_lnprob from loaded results in mode=="load" init.
