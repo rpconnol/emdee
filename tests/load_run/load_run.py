@@ -2,6 +2,7 @@
 
 import time
 import datetime
+import shutil
 import os
 import sys
 sys.path.insert(
@@ -14,7 +15,12 @@ import emdee
 print(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'))
 
 
-emdeeClass = emdee.Emdee(mode='load',loc='test_data')
+if os.path.exists('load_data'):
+    shutil.rmtree('load_data')
+shutil.copytree('test_data','load_data')
+
+
+emdeeClass = emdee.Emdee(mode='load',loc='load_data')
 emdeeClass.PrintParams()
 #print(emdeeClass.nwalkers)
 #print(emdeeClass._lastlogged)

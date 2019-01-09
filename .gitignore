@@ -13,3 +13,7 @@ dev
 LOGS
 *.png
 output_*
+
+# load_run test stuff
+tests/load_run/load_data
+tests/load_run/inlist
