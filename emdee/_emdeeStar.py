@@ -1,5 +1,6 @@
 import shutil
 import subprocess
+import sys
 
 class mixin:
 
@@ -22,9 +23,19 @@ class mixin:
     
     def _RunDStar(self):
         
+        # If running Python 3, need an additional kwarg to subprocess.Popen,
+        # otherwise stdout is parsed as binary(?) rather than text...
+        # The 'text' kwarg doesn't exist in Python 2.x though, so will error.
+        #kwargs = {}
+        #if sys.version_info >= (3, 0):
+        #    kwargs = {'text': True}
+        # EDIT: actually this might be taken care of by universal_newlines=True,
+        # which is aliased by 'text' but still exists for backwards compat.
+
         process = subprocess.Popen(
             "./run_dStar -D "+self.dstar_dir+" -I inlist",
-            shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            universal_newlines=True)
         
         chi2 = process.stdout.readlines()[-1]
         chi2 = float(chi2.strip(' \t\n\r'))
