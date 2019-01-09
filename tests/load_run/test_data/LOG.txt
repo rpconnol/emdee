@@ -47,3 +47,11 @@ Percentiles:
 (percentiles calculated from full chain; no burn in removal)
 
 
+Update: 2019-01-09 14:52:29
+Total iterations: 18
+Percentiles:
+  core_mass: 1.66 +0.10 -0.09
+  core_radius: 11.23 +0.39 -0.73
+(percentiles calculated from full chain; no burn in removal)
+
+

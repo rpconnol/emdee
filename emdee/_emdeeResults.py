@@ -64,6 +64,7 @@ class mixin:
         # Median, up, down
         percentiles = map(lambda v: (v[1], v[2]-v[1], v[1]-v[0]), 
 	                      zip(*np.percentile(samples, [16, 50, 84],axis=0)))
+        percentiles = list(percentiles)
         
         s = "Percentiles:\n"
         for i in range(len(self.params)):
