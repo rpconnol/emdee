@@ -11,8 +11,7 @@ class mixin:
 
         for i in range(len(theta)):
             if self.params[i] == 'Mdot':
-                f.write("   epoch_Mdots = {:e},{:d}*0.0\n".format(
-                    theta[i],self.MdotIntervals))
+                f.write("   epoch_Mdots(1) = {:e}\n".format(theta[i]))
             else:
                 f.write("   "+self.params[i]+" = {}\n".format(theta[i]))
         

@@ -18,7 +18,8 @@ print(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
 if os.path.exists('load_data'):
     shutil.rmtree('load_data')
 shutil.copytree('test_data','load_data')
-os.remove('load_data/README')
+if os.path.exists('load_data/README'):
+    os.remove('load_data/README')
 
 
 emdeeClass = emdee.Emdee(mode='load',loc='load_data')
