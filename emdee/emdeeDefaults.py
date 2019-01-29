@@ -6,7 +6,7 @@ def Bounds(p=None):
     "Qimp": [0.0,40.0],
     "core_temperature": [1e6,1e7],
     "Mdot": [1e16,1e18],
-    "Q_shallow_heating": [0.0,5.0]
+    "Q_heating_shallow": [0.0,5.0]
     }
 
     # if no argument is provided, just prints a list of the default bounds
@@ -29,7 +29,7 @@ def Format(p):
     "Qimp": "{:.1f}",
     "core_temperature": "{:.2e}",
     "Mdot": "{:.1e}",
-    "Q_shallow_heating": "{:.2f}"
+    "Q_heating_shallow": "{:.2f}"
     }
 
     # if param is not in format_dict, returns {} as a default format

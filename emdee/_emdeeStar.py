@@ -36,7 +36,13 @@ class mixin:
             shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
             universal_newlines=True)
         
-        chi2 = process.stdout.readlines()[-1]
-        chi2 = float(chi2.strip(' \t\n\r'))
+        try:
+            chi2 = process.stdout.readlines()[-1]
+            chi2 = float(chi2.strip(' \t\n\r'))
 
-        return chi2
+            return chi2
+        except ValueError:
+            return 99999999.9
+            # If the parameters are unable to construct a dStar model and
+            # dStar bails out with 'NScool_evolve_model: ierr = -8' or 
+            # something similar, catch the exception and return terrible chi2

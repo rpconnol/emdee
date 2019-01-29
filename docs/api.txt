@@ -19,11 +19,6 @@ dstar_dir -- location of dStar on the machine. Defaults to "$DSTAR_DIR", if
              this environment variable is set then you shouldn't need to mess 
              with this.
 data_dir -- Location of saved data
-MdotIntervals -- special variable to indicate the number of "extra" epoch_Mdot
-				 intervals where mdot = 0.0, to align with the desired number of
-				 "monitor" times for your chosen source.
-				 Example: epoch_Mdots = 1e17,7*0.0 for MXB obs data, so MdotIntervals=7
-				 ## Not sure I'm particularly happy with the way this is done atm ##
 _lastlogged -- the last time step written to the logs / file output. For 
                loaded runs, this will be determined from the final line of 
                the loaded histories.
