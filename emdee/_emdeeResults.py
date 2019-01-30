@@ -23,8 +23,9 @@ class mixin:
 
                 axes[iparam].set_ylabel(self.params[iparam])
 
-                if self.params[iparam] in hlines:
-                    axes[iparam].axhline(hlines[self.params[iparam]])
+                if hlines is not None:
+                    if self.params[iparam] in hlines:
+                        axes[iparam].axhline(hlines[self.params[iparam]])
 
 
         if save == True:
