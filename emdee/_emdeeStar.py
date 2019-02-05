@@ -39,9 +39,12 @@ class mixin:
         try:
             chi2 = process.stdout.readlines()[-1]
             chi2 = float(chi2.strip(' \t\n\r'))
-
+            
+            if self._debugging == True: print('dstar return = '+str(chi2))
             return chi2
         except ValueError:
+            if self._debugging == True: 
+                print('dstar return = BIG (couldnt capture chi2)')
             return 99999999.9
             # If the parameters are unable to construct a dStar model and
             # dStar bails out with 'NScool_evolve_model: ierr = -8' or 

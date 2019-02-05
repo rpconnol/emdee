@@ -3,7 +3,10 @@ import emcee
 
 class mixin:
 
-    def GoMCMC(self, nsteps, output=True):
+    def GoMCMC(self, nsteps, output=True, debug=False):
+
+        # internal use -- enabled for more verbiose output and diagnosis
+        if debug==True: self._debugging = True
 
         if self._lastlogged == 0:
             print("Fresh run -- initializing walkers and sampler...")
@@ -85,10 +88,12 @@ class mixin:
 
         lp = self._LnPrior(theta)
         if not np.isfinite(lp):
+            if self._debugging == True: print("final chi2 = -inf (priors)")
             return -np.inf
         
         ll = self._LnLike(theta)
 
+        if self._debugging == True: print('final chi2 ='+str(lp+ll))
         return lp + ll
     
 
