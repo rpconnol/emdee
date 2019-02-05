@@ -53,6 +53,8 @@ class Emdee(emdee._emdeePrep.mixin,
         
         self.dstar_dir = '$DSTAR_DIR'
     
+        self._debugging = False
+    
 
 
     # _emdeePrep.mixin contains:
