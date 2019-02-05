@@ -4,7 +4,7 @@ def Bounds(p=None):
     "core_mass": [1.4,2.0],
     "core_radius": [8.0,13.0],
     "Qimp": [0.0,40.0],
-    "core_temperature": [1e6,1e7],
+    "core_temperature": [1e7,1e8],
     "Mdot": [1e16,1e18],
     "Q_heating_shallow": [0.0,5.0]
     }
