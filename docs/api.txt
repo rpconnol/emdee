@@ -14,6 +14,8 @@ Variables:
 params -- names of dStar parameters to include in the MCMC analysis
 lbounds -- lower bounds on the above parameters
 ubounds -- upper bounds on the above parameters
+gaussinit -- dictionary of {param: [mean,sigma]} for optional Gaussian
+             initialization of parameters (see AddParam or _InitWalkers)
 nwalkers -- number of walkers in the MCMC, default = 100
 dstar_dir -- location of dStar on the machine. Defaults to "$DSTAR_DIR", if 
              this environment variable is set then you shouldn't need to mess 
@@ -38,16 +40,20 @@ _emceeSampler -- the emcee.EnsembleSampler class
 
 "Public" functions (user interface):
 
-AddParam(p,b)
+AddParam(p,b,gaussian_init)
 	Adds a dStar parameter p to the MCMC, with bounds b=[lower,upper].
 	If a parameter is already in the list, you'll get yelled at.
-	example:  Emdee.AddParam("core_mass",[1.4,2.0])
+	If you want to guess initial positions from a normal distribution, provide
+	gaussian_init=[mean,sigma]. Otherwise inital walker positions uniformly
+	random within bounds.
+	example:  Emdee.AddParam("core_mass",[1.4,2.0],gaussian_init=[1.6,0.1])
 	If one doesn't provide bounds, a default pair will be chosen 
 	(see _DefaultBounds).
 	Can only be performed if the run is fresh (_lastlogged == 0)!
 
-ChangeBounds(p,b)
+ChangeBounds(p,b,gaussian_init)
 	Changes the bounds b on a parameter p that's already in the MCMC.
+	gaussian_init same as in AddParam.
 	If the parameter isn't in the list yet, you'll get yelled at.
 	example:  Emdee.ChangeBounds("core_mass",[1.6,2.1])
 	Must provide bounds manually for this! If you desperately want defaults try:
@@ -105,7 +111,9 @@ PrintPercentiles(lowmidhigh=[16,50,84],burnin=0,lastpt=False,print_acor=False,_l
 
 _InitWalkers()
 	Initialize the walkers with positions for each param taken from 
-    respective bounds.
+    respective bounds. If self.gaussinit[param] is defined (see AddParam or 
+	ChangeBounds), the initial positions for param are pulled from a normal
+	distribution. If not, just chosen uniformly random within bounds.
 
 _InitSampler()
 	Initializes self.emceeSampler as an emcee.EnsembleSampler with self.nwalkers,

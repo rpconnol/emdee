@@ -52,8 +52,39 @@ class mixin:
         for i in range(self.nwalkers):
             x = []
             for iparam in range(ndim):
-                x.append(np.random.uniform(self.lbounds[iparam],
-                                           self.ubounds[iparam]))
+
+                # Gaussian initialization (optional)
+                # If current parameter is in the gaussinit dictionary...
+                if self.params[iparam] in self.gaussinit:
+                    p = self.params[iparam]
+                    gmean = self.gaussinit[p][0]  # Grab the mean
+                    gsigma = self.gaussinit[p][1] # and sigma
+                    
+                    i = 0
+                    while i < 10:
+                        # Try generating initial value from that distribution
+                        gx = np.random.normal(gmean,gsigma)
+                        # If the value is within the bounds for this parameter..
+                        if (gx > self.lbounds[iparam]) and \
+                           (gx < self.ubounds[iparam]):
+                            break # then break out and append it to x
+                        i = i+1
+
+                    if i < 10:
+                        x.append(gx)
+                    else:
+                        # If 10 attempts were made and all values were outside
+                        # the defined bounds, then just use the mean as the 
+                        # initial position I guess (might have multiple walkers
+                        # with this same starting position though)
+                        x.append(gmean)
+                
+                # If this parameter is not in the gaussinit dictionary,
+                # just pick a value uniformly random between its bounds
+                else:
+                    x.append(np.random.uniform(self.lbounds[iparam],
+                                               self.ubounds[iparam]))
+                                               
             pos0.append(x) # Append position of i'th walker
         
         # Return positions of all walkers. pos0 looks like (e.g.):

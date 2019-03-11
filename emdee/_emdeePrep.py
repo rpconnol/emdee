@@ -11,7 +11,7 @@ import emdee._emdeeExceptions
 
 
 class mixin:
-    def AddParam(self,p,b=None):
+    def AddParam(self,p,b=None,gaussian_init=None):
 
         if self._lastlogged > 0:
             #raise emdee._emdeeExceptions.NonzeroRunCount(
@@ -26,12 +26,15 @@ class mixin:
                 lb = b[0]
                 ub = b[1]
             
+            if gaussian_init is not None:
+                self.gaussinit[p] = gaussian_init
+            
             self.params.append(p)
             self.lbounds.append(lb)
             self.ubounds.append(ub)
     
 
-    def ChangeBounds(self,p,b):
+    def ChangeBounds(self,p,b,gaussian_init=None):
 
         if self._lastlogged > 0:
             #raise emdee._emdeeExceptions.NonzeroRunCount(
@@ -45,6 +48,9 @@ class mixin:
 
             self.lbounds[idx] = lb
             self.ubounds[idx] = ub
+
+            if gaussian_init is not None:
+                self.gaussinit[p] = gaussian_init
         else:
             print(p+" is not in the current parameter list.")
     

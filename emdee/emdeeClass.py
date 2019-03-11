@@ -50,6 +50,7 @@ class Emdee(emdee._emdeePrep.mixin,
             self.params = []
             self.lbounds = []
             self.ubounds = []
+            self.gaussinit = {'none': None}
         
         self.dstar_dir = '$DSTAR_DIR'
     
