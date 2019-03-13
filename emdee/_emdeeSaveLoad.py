@@ -1,6 +1,7 @@
 import time
 import datetime
 import numpy as np
+import shutil
 
 import emdee
 
@@ -35,6 +36,9 @@ class mixin:
         f.write("\n\n")
 
         f.close()
+
+        f.write("Copying inlist_preamble to "+self.data_dir+"\n")
+        shutil.copyfile('./inlist_preamble',self.data_dir+'/inlist_preamble')
 
 
     def _LogUpdate(self):
@@ -89,7 +93,8 @@ class mixin:
 
 
     def _OutputOneLine(self,pos):
-        #Writes single ("previous") MCMC step to files. Mostly for testing?
+        #Writes single ("previous") MCMC step to files. Safer currently due
+        #to crashes or unexpectedly ending the run before all nsteps are done.
 
         for iparam in range(len(self.params)):
 

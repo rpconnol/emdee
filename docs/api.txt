@@ -169,7 +169,8 @@ _Output()
 	preference of _OutputOneLine for now.
 
 _OutputOneLine(pos)
-	Writes single (previous) MCMC step (pos) to files.
+	Writes single (previous) MCMC step (pos) to files. Safer for the time being
+	in the event of crashes or issues, job timeout on remote servers, etc.
 
 _OutputCurrentLnprob(lnp,loc='last_lnprob.txt')
 	Writes lnp to a file, the most recent lnprobs, which is loaded if this run ever
