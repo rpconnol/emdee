@@ -8,6 +8,7 @@ class mixin:
 
         shutil.copy('inlist_preamble','inlist')
         f = open("inlist", "at")
+        f.write("\n")
 
         for i in range(len(theta)):
             if self.params[i] == 'Mdot':

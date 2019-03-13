@@ -9,6 +9,7 @@ import datetime
 import time
 import os
 
+
 class Emdee(emdee._emdeePrep.mixin, 
             emdee._emdeeMCMC.mixin, 
             emdee._emdeeStar.mixin, 
@@ -35,13 +36,19 @@ class Emdee(emdee._emdeePrep.mixin,
         if mode == 'new':
             print("creating new run")
 
+            
             if loc == None:
                 loc = datetime.datetime.fromtimestamp(
                     time.time()).strftime('output_%Y-%m-%d_%Hh%Mm%Ss')
             self.data_dir = loc
+
+            if os.path.exists(self.data_dir):
+                sys.exit(self.data_dir+" directory already exists, please remove\n"+
+                "it, or choose a different location to save results.")
             if not os.path.exists(self.data_dir):
                 os.makedirs(self.data_dir)
                 print("creating "+self.data_dir+" directory")
+            
 
             self.nwalkers = 100
 
