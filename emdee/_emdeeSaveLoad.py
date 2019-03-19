@@ -35,10 +35,12 @@ class mixin:
                 self.lbounds[i],self.ubounds[i]))
         f.write("\n\n")
 
-        f.close()
-
         f.write("Copying inlist_preamble to "+self.data_dir+"\n")
         shutil.copyfile('./inlist_preamble',self.data_dir+'/inlist_preamble')
+
+        f.close()
+
+       
 
 
     def _LogUpdate(self):
