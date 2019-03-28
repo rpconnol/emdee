@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rm -rf ./*/run_dStar
+rm -rf ./*/make/run_dStar
+rm -rf ./*/make/*.o
+rm -rf ./*/inlist
+rm -rf ./*/LOGS/*

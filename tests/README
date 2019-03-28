@@ -1,0 +1,7 @@
+This is not a rigorous set of unit tests or anything, just a hodge podge of cases
+used for internal testing.
+
+new_run and load_run are deprecated, modified and used in /examples instead
+
+./clean in this directory to remove all compiled files (run_dStar and .o files) and 
+other remnants (LOGS, inlists, etc)

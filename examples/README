@@ -1,0 +1,5 @@
+A set of examples to give an idea of emdee functionality and how the dStar project
+should be set up. See individual README documentation for each example.
+
+./clean in this directory to remove all compiled files (run_dStar and .o files) and 
+other remnants (LOGS, inlists, etc)

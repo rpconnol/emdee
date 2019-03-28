@@ -1,4 +1,4 @@
 This is a FIXED set of data that should NOT be loaded or touched.
 
 This data is copied to a load_data directory which is then modified and read in
-(and ignored by git).
+by emdee (and ignored by git).
