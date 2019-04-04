@@ -5,3 +5,6 @@ rm -rf ./*/make/run_dStar
 rm -rf ./*/make/*.o
 rm -rf ./*/inlist
 rm -rf ./*/LOGS/*
+
+rm -rf ./*/output_*
+rm -rf ./*/load_data

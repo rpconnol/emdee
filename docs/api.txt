@@ -103,6 +103,12 @@ PrintPercentiles(lowmidhigh=[16,50,84],burnin=0,lastpt=False,print_acor=False,_l
 	print_acor will include the estimated autocorrelation time for each parameter.
 	_log is for internal use; returns the output as a string, instead of just printing it.
 
+PrintBestFits(n=5,save=False,name="bestfits.txt")
+	Print the dStar parameter values for the n best fits from the most recent
+	step (last_lnprob.txt). The chi2 and params+value are shown for the n walkers
+	with the highest lnprob (lowest chi2).
+	If save == True, saves to a file (in loc) with filename 'name'.
+
 
 
 

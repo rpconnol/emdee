@@ -92,3 +92,62 @@ class mixin:
         else:
             print(s)
         
+
+    def PrintBestFits(self,n=5,save=False,name="bestfits.txt"):
+        # Grab the param values for the n walkers with the largest lnprob.
+        # If save == True, save to a file (in output directory) called [name].
+
+        # self._current_lnprob contains the current (or "loaded") lnprobs and
+        # lnprob * -2.0 = chi2 from dStar (LnLike returns -chi2 / 2.0)
+
+        ## SUMMARY ##
+        # To get the best n fits, use:
+        #   ind = np.argpartition(lnprob, -n)[-n:]
+        # This isn't sorted in any way however, so perform the following:
+        #   ind_sort = ind[np.argsort(lnprob[ind])]
+        # This returns the list of indeces of the top n values of lnprob, sorted
+        # LOW to HIGH. Since we actually WANT the HIGHEST lnprob ("best fit"):
+        #   ind_sort = ind_sort[::-1]
+        # Now ind_sort is the indeces of the n walkers that have the best fit,
+        # from BEST (largest lnprob and therefore lowest chi2) to worst.
+        # Step through each of these and grab all the params for that walker.
+
+        lnprob = self._current_lnprob
+
+        ind = np.argpartition(lnprob, -n)[-n:]  # Indeces of n largest values
+        ind_sort = ind[np.argsort(lnprob[ind])] # Indeces but low to high lnprob
+        ind_sort = ind_sort[::-1]               # Indeces but high to low lnprob
+
+        # ind_sort is "the best n walkers", from best to worst chi2
+
+        ndim = len(self.params)
+
+        s = ""  # This will be the large string either printed or saved
+
+        for iwalker in ind_sort:
+
+            chi2 = lnprob[iwalker] * -2.0
+            s += "chi2: "+str(chi2)+"\n"
+            
+            for iparam in range(ndim):
+                p = self.params[iparam]
+                fmt = emdee.emdeeDefaults.Format(p)
+                # self._current_pos has shape [walker#,param#]
+                s += ((p+" = "+fmt).format(self._current_pos[iwalker,iparam]))
+                s += "\n"
+                
+            s += "\n"
+        
+        if save == True:
+            f = open(self.data_dir+"/"+name, "w")
+            f.write(s)
+            f.close()
+        else:
+            print(s)
+        
+
+    #def PlotBestFits(self,name="bestfits.txt"):
+        # Pull the N best fits from 'name' (default: bestfits.txt) and run+plot
+        # them each individually.
+
+        # Not yet.

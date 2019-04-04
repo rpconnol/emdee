@@ -1,0 +1,17 @@
+Created: 2018-12-13 15:01:27
+Output directory: output_2018-12-13_15h01m27s
+
+Number of walkers: 10
+dStar parameters:
+  core_mass   1.40 - 2.00
+  core_radius   8.00 - 13.00
+
+
+Update: 2019-01-09 15:23:31
+Total iterations: 24
+Percentiles:
+  core_mass: 1.66 +0.08 -0.09
+  core_radius: 11.21 +0.38 -0.71
+(percentiles calculated from full chain; no burn in removal)
+
+

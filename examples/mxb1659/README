@@ -1,1 +1,8 @@
-READ  ME
+This is an example to illustrate the "typical" use and common functions of an emdee
+science run. 
+
+1_new_run.py outlines creating a new emdee class and executing from scratch.
+2_load_run.py outlines the functionality for loading old results and continuing from
+  where the previous run left off.  
+3_results_and_plots.py illustrates the plotting and 
+  other output functionality for actually crunching results.

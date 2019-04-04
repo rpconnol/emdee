@@ -51,6 +51,11 @@ emdeeClass.PlotCorner(save=True,name='corner.png',burnin=70)
 #   beginning, just as in PlotCorner.
 emdeeClass.PrintPercentiles(lastpt=True)
 
+# PrintBestFits spits out a summary of the 'n' walkers with the best fits to the data
+# (highest lnprob, or lowest chi2). Default n is 5. If save is False, just prints
+# to the terminal. If save is True, saves to a file with 'name' (default: 'bestfits.txt)
+emdeeClass.PrintBestFits(n=10,save=True,name='bestfits.txt')
+
 
 # It should be noted that all these same plot commands could of course be used at the end
 # of a "new" Emdee run to plot/save the results, all in one Python script. This example
