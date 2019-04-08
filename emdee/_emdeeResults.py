@@ -32,6 +32,8 @@ class mixin:
             plt.savefig(self.data_dir+"/"+name)
         else:
             plt.show()
+        
+        print('plotted chains')
 
 
     def PlotCorner(self,burnin=0,lastpt=False,save=False,name="corner.png"):
@@ -49,6 +51,8 @@ class mixin:
             plt.savefig(self.data_dir+"/"+name)
         else:
             plt.show()
+        
+        print('plotted corner')
     
 
     def PrintPercentiles(self,lowmidhigh=[16,50,84],
@@ -144,6 +148,8 @@ class mixin:
             f.close()
         else:
             print(s)
+        
+        print('printed best fits')
         
 
     #def PlotBestFits(self,name="bestfits.txt"):
