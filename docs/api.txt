@@ -94,13 +94,16 @@ PlotCorner(save=False,name="corner.png",burnin=0,lastpt=False)
 	lastpt -- will only plot the final position of each walker, rather than 
               all data after burnin (burnin is ignored if lastpt==True).
 
-PrintPercentiles(lowmidhigh=[16,50,84],burnin=0,lastpt=False,print_acor=False,_log=False)
+PrintPercentiles(lowmidhigh=[16,50,84],burnin=0,lastpt=False,
+				save=False,name="percentiles.txt",print_acor=False,_log=False)
 	Print the "values + error bars" of each parameter. By default, "Mean" 
     value is 50th percentile, "upper error" is 84th percentile, "lower error" 
     is 16th percentile.
 	These can be set manually with lowmidhigh.
 	burnin and lastpt work same as in PlotCorner.
-	print_acor will include the estimated autocorrelation time for each parameter.
+	print_acor will include the estimated autocorrelation time for each parameter,
+		(if it's able to compute it).
+	If save == True, saves to a file (in loc) with filename 'name'.
 	_log is for internal use; returns the output as a string, instead of just printing it.
 
 PrintBestFits(n=5,save=False,name="bestfits.txt")

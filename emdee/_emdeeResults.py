@@ -57,6 +57,7 @@ class mixin:
 
     def PrintPercentiles(self,lowmidhigh=[16,50,84],
                          burnin=0,lastpt=False,
+                         save=False,name="percentiles.txt",
                          print_acor=False,_log=False):
 
         ndim = len(self.params)
@@ -89,12 +90,18 @@ class mixin:
                     print("The chain is too short to calc autocorr")
             s += "\n"
         
-        # if _log is True, assumes you want to write it to a file, so just
-        # returns the s string. If False, just prints to stdout.
+        # if _log is True, assumes it's being used for _LogUpdate, so just
+        # returns the s string. Else if save is True, then saves to file.
+        # If neither of those, just prints to stdout.
         if _log == True:
             return s
         else:
-            print(s)
+            if save == True:
+                f = open(self.data_dir+"/"+name, "w")
+                f.write(s)
+                f.close()
+            else:
+                print(s)
         
 
     def PrintBestFits(self,n=5,save=False,name="bestfits.txt"):
