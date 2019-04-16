@@ -18,9 +18,11 @@ email me or submit on Github and they should be resolvable (hopefully) with mino
 1) Download the `emdee` repository from GitHub or checkout with SVN using the 
 web URL: https://github.com/rpconnol/emdee.git. Place as preferred.
 2) At the top of your project scripts, at the `emdee` directory to the path:
-```import os
+```
+import os
 import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '~/path/to/emdee')))```
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '~/path/to/emdee')))
+```
 The path can be absolute or relative (see the mxb1659 example). This doesn't change your
 permanent Python path, only locally within the current script.
 3) Once your .py contains the above path correction, you can `import emdee` like a module.
