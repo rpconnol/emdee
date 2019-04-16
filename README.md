@@ -12,7 +12,7 @@ Development on this module began in Python 2.7 but switched to 3.x eventually.
 It SHOULD work with both versions, but if you have issues related to using Python 2.7
 email me or submit on Github and they should be resolvable (hopefully) with minor tweaks.
 
-
+-----
 
 **Importing the module:**
 1) Download the `emdee` repository from GitHub or checkout with SVN using the 
@@ -31,6 +31,8 @@ permanent Python path, only locally within the current script.
 
 4) Note that you want to point to the "base" `emdee` directory (the one that contains 
 this readme), not the nested `emdee/emdee` directory that contains all of the source code.
+
+-----
 
 **Setting up dStar first:**
 
