@@ -34,7 +34,7 @@ this readme), not the nested `emdee/emdee` directory that contains all of the so
 
 -----
 
-**Setting up dStar first:**
+**Preparing dStar:**
 
 1) This module should be used (either by script or terminal) from a 
 **DSTAR WORKING DIRECTORY**. That means there needs to be a compiled and ready `run_dStar` 
