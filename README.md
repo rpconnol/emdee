@@ -1,7 +1,5 @@
 Wrapper for use of the 'emcee' Python module with dStar
 
-Currently in heavy development.
-
 See docs/api.txt or the examples directory for info on how to interact with the package.
 
 Required Python modules:
@@ -16,7 +14,20 @@ email me or submit on Github and they should be resolvable (hopefully) with mino
 
 
 
-Setting up dStar first:
+**Importing the module:**
+1) Download the `emdee` repository from GitHub or checkout with SVN using the 
+web URL: https://github.com/rpconnol/emdee.git. Place as preferred.
+2) At the top of your project scripts, at the `emdee` directory to the path:
+```import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '~/path/to/emdee')))```
+The path can be absolute or relative (see the mxb1659 example). This doesn't change your
+permanent Python path, only locally within the current script.
+3) Once your .py contains the above path correction, you can `import emdee` like a module.
+4) Note that you want to point to the "base" `emdee` directory (the one that contains 
+this readme), not the nested `emdee/emdee` directory that contains all of the source code.
+
+**Setting up dStar first:**
 1) This module should be used (either by script or terminal) from a 
 **DSTAR WORKING DIRECTORY**. That means there needs to be a compiled and ready `run_dStar` 
 IN the current working directory (plus anything dStar might whine about, like LOGS dir).
