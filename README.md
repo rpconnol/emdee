@@ -2,6 +2,14 @@ Wrapper for use of the 'emcee' Python module with dStar
 
 See docs/api.txt or the examples directory for info on how to interact with the package.
 
+**Requires** both `mesa` (mesa.sourceforge.net) and `dStar` (github.com/nworbde/dStar).
+Developed and tested with `mesa` revision 10398 (March 2018) and corresponding `dStar` 
+release (May 2018). See each codes' respective website for installation information.
+`mesa` should be compiled and installed successfully **first**, followed by `dStar`,
+which uses some of the `mesa` math and matrix libraries. Once both are installed
+successfully according to their respective documentation, `emdee` can be used (see also
+**"Preparing dStar"** section below).
+
 Required Python modules:
 - numpy
 - matplotlib
@@ -11,6 +19,8 @@ Required Python modules:
 Development on this module began in Python 2.7 but switched to 3.x eventually.
 It SHOULD work with both versions, but if you have issues related to using Python 2.7
 email me or submit on Github and they should be resolvable (hopefully) with minor tweaks.
+
+
 
 -----
 
