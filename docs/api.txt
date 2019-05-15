@@ -102,7 +102,10 @@ PrintPercentiles(lowmidhigh=[16,50,84],burnin=0,lastpt=False,
 	These can be set manually with lowmidhigh.
 	burnin and lastpt work same as in PlotCorner.
 	print_acor will include the estimated autocorrelation time for each parameter,
-		(if it's able to compute it).
+		(if it's able to compute it). I've found that even for the longest runs
+		(hundreds of walkers, hundreds of steps) it's still unable to calculate
+		the autocorrelation time, so I don't know the details of why/how this is 
+		calculated but it's probably best to judge burn-in by eye.
 	If save == True, saves to a file (in loc) with filename 'name'.
 	_log is for internal use; returns the output as a string, instead of just printing it.
 

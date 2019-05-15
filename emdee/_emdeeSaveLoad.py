@@ -60,7 +60,7 @@ class mixin:
 
         f.write("Total iterations: {:d}\n".format(self._lastlogged))
 
-        f.write(self.PrintPercentiles(print_acor=True,_log=True))
+        f.write(self.PrintPercentiles(print_acor=False,_log=True))
         f.write("(percentiles calculated from full chain; no burn in removal)")
 
         f.write("\n\n\n")

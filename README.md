@@ -28,7 +28,7 @@ email me or submit on Github and they should be resolvable (hopefully) with mino
 1) Download the `emdee` repository from GitHub or checkout with SVN using the 
 web URL: https://github.com/rpconnol/emdee.git. Place as preferred.
 
-2) At the top of your project scripts, at the `emdee` directory to the path:
+2) At the top of your project scripts, add the `emdee` directory to the path:
 ```
 import os
 import sys
@@ -60,4 +60,4 @@ This basically just means taking the desired inlist for the dStar run of choice,
 chop off the "bottom" (the trailing slash, and any controls one might not want hanging
 around), and call it 'inlist_preamble'. This file will be copied to actual 'inlist' 
 before each dStar run and then the MCMC params + values will be appended, along with
-the trailing slash/returns to close the file.
+the trailing slash/returns to close the file. Again see the mxb1659 example for reference.
